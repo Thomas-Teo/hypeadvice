@@ -35,17 +35,17 @@ public class AdviceService {
     }
 
     public AdviceListVO buscar(Advice advice) throws UnirestException {
-      String descricao = advice.getDescricao();
-      if (StringUtils.isNotBlank(descricao)) {
-          return advicesLIPService.buscarByDescricao(descricao);
+      if (advice == null) {
+          return null;
       }
-      return null;
-    }
-
-    public AdviceVO buscar_id(Advice advice) throws UnirestException {
       Long id = advice.getId();
       if (id != null) {
           return advicesLIPService.buscarById(id);
+      }
+
+      String descricao = advice.getDescricao();
+      if (StringUtils.isNotBlank(descricao)) {
+          return advicesLIPService.buscarByDescricao(descricao);
       }
       return null;
     }

@@ -22,10 +22,14 @@
 
     <b:container>
         <b:jumbotron>
-            <h4 style="text-align:center;">Pesquisar Conselhos por Descrição</h4>
+            <h4 style="text-align:center;">Pesquisar Conselhos</h4>
             <b:messages globalOnly="true" showSummary="true" redisplay="false" id="mensagensGlobais"/>
             <h:form id="form-advice">
                 <b:form>
+                    <b:inputText type="number" label="ID"
+                                 value="#{adviceListBean.advice.id}"/>
+                    <b:message for="@previous"/>
+
                     <b:inputTextarea label="Descrição"
                                      value="#{adviceListBean.advice.descricao}"/>
                     <b:message for="@previous"/>
@@ -44,33 +48,6 @@
                     <b:dataTableColumn style="width:10%" value="#{advice.id}"/>
                     <b:dataTableColumn value="#{advice.advice}"/>
                     <b:dataTableColumn value="#{advice.date}"/>
-                </b:dataTable>
-            </h:form>
-        </b:jumbotron>
-    </b:container>
-    <b:container>
-        <b:jumbotron>
-            <h4 style="text-align:center;">Pesquisar Conselhos por ID</h4>
-            <b:messages globalOnly="true" showSummary="true" redisplay="false" id="mensagensGlobaisId"/>
-            <h:form id="form-advice-id">
-                <b:form>
-                    <b:inputText type="number" label="ID"
-                                 value="#{adviceIdBean.advice.id}"/>
-                    <b:message for="@previous"/>
-
-                    <b:commandButton actionListener="#{adviceIdBean.buscar}" look="info"
-                                     update="form-advice-id-list mensagensGlobaisId" value="Buscar">
-                    </b:commandButton>
-                </b:form>
-            </h:form>
-        </b:jumbotron>
-        <b:jumbotron>
-            <h:form id="form-advice-id-list">
-                <h4 style="text-align:center">Conselhos por id Localizados</h4>
-                <b:dataTable value="#{adviceIdBean.adviceVO.slip}"
-                             var="advice">
-                    <b:dataTableColumn style="width:10%" value="#{advice.id}"/>
-                    <b:dataTableColumn value="#{advice.advice}"/>
                 </b:dataTable>
             </h:form>
         </b:jumbotron>
