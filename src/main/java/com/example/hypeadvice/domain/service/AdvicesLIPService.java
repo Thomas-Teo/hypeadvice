@@ -12,7 +12,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AdvicesLIPService {
@@ -74,7 +76,7 @@ public class AdvicesLIPService {
         }
     }
 
-    public AdviceVO buscarById(Long id) throws UnirestException {
+    public AdviceListVO buscarById(Long id) throws UnirestException {
         HttpResponse<String> response = Unirest.get("https://api.adviceslip.com/advice/" + id)
                 .header("Accept-Language", "br")
                 .header("Content-Type", "application/json")
@@ -93,7 +95,15 @@ public class AdvicesLIPService {
             }
 
             if (adviceVO != null) {
-                return adviceVO;
+                List<Slip> slipList = new ArrayList<>();
+                slipList.add(adviceVO.getSlip());
+
+                AdviceListVO adviceListVO = new AdviceListVO();
+                adviceListVO.setTotal_results(1);
+                adviceListVO.setQuery("");
+                adviceListVO.setSlips(slipList);
+
+                return adviceListVO;
             } else {
                 throw new RuntimeException("Status Code" + status + ", message " + response.getStatusText());
             }
