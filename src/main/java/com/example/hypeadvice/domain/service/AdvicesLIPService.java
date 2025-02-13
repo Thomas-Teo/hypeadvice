@@ -91,7 +91,7 @@ public class AdvicesLIPService {
                 }
                 adviceVO = Utils.jsonToObject(AdviceVO.class, body);
             } catch (Exception e) {
-                throw new RuntimeException("Status Code" + status + ", message " + e.getMessage());
+                throw new RuntimeException("Nenhum conselho encontrado para o id " + id);
             }
 
             if (adviceVO != null) {
